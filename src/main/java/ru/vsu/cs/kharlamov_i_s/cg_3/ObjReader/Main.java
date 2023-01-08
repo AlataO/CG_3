@@ -1,8 +1,8 @@
-package com.cgvsu;
+package ru.vsu.cs.kharlamov_i_s.cg_3.ObjReader;
 
-import com.cgvsu.model.Model;
-import com.cgvsu.objreader.ObjReader;
-import com.cgvsu.objreader.ReaderExceptions;
+import ru.vsu.cs.kharlamov_i_s.cg_3.model.Model;
+import ru.vsu.cs.kharlamov_i_s.cg_3.ObjReader.ObjReader;
+import ru.vsu.cs.kharlamov_i_s.cg_3.ObjReader.ReaderExceptions;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,7 +14,7 @@ public class Main {
 /*реализация objReader строгое содержимое файла (никаких посторонних символов), большинство косяков
 выходят в исключениях, содержимое файла читается в любом порядке*/
     public static void main(String[] args) {
-        Path fileName = Path.of("Teapot.obj");
+        Path fileName = Path.of("D:\\Projects\\Year 2\\1 Semester\\CG_3\\src\\main\\java\\ru\\vsu\\cs\\kharlamov_i_s\\cg_3\\ObjReader\\Teapot.obj");
         String fileContent;
         try {
             fileContent = Files.readString(fileName);

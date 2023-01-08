@@ -1,7 +1,6 @@
-package com.cgvsu.model;
+package ru.vsu.cs.kharlamov_i_s.cg_3.model;
 
-import com.cgvsu.math.Vector2f;
-import com.cgvsu.objreader.ObjReader;
+import  ru.vsu.cs.kharlamov_i_s.cg_3.math.Vector2f;
 
 import java.util.ArrayList;
 import java.util.List;

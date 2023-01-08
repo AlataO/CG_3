@@ -1,9 +1,9 @@
-package OBJ.Writer;
+package ru.vsu.cs.kharlamov_i_s.cg_3.ObjWriter;
 
-import com.company.Model;
-import com.company.Polygon;
-import com.company.Vector2f;
-import com.company.Vector3f;
+import ru.vsu.cs.kharlamov_i_s.cg_3.model.Model;
+import ru.vsu.cs.kharlamov_i_s.cg_3.model.Polygon;
+import ru.vsu.cs.kharlamov_i_s.cg_3.math.Vector2f;
+import ru.vsu.cs.kharlamov_i_s.cg_3.math.Vector3f;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -19,10 +19,10 @@ public class ObjWriter {
     public static void writeToFile(Model model, File file) throws IOException {
         String str = "";
 
-        str += writeVertexes(model.vertices);
-        str += writeTextureVertexes(model.textureVertices);
-        str += writeNormals(model.normals);
-        str += writePolygons(model.polygons);
+        str += writeVertexes((ArrayList<Vector3f>) model.getVertices());
+        str += writeTextureVertexes((ArrayList<Vector2f>) model.getTextureVertices());
+        str += writeNormals((ArrayList<Vector3f>) model.getNormals());
+        str += writePolygons((ArrayList<Polygon>) model.getPolygons());
 
         toFile(str, file.getAbsolutePath());
     }
@@ -36,9 +36,9 @@ public class ObjWriter {
     protected static String writeVertexes(final ArrayList<Vector3f> v){
         String str = "";
         for (int i = 0; i < v.size(); i++){
-            final String vx = String.format("%.4f", v.get(i).x).replace(',', '.');
-            final String vy = String.format("%.4f", v.get(i).y).replace(',', '.');
-            final String vz = String.format("%.4f", v.get(i).z).replace(',', '.');
+            final String vx = String.format("%.4f", v.get(i).getX()).replace(',', '.');
+            final String vy = String.format("%.4f", v.get(i).getY()).replace(',', '.');
+            final String vz = String.format("%.4f", v.get(i).getZ()).replace(',', '.');
             str = str + "v  " + vx + " " + vy + " " + vz + "\n";
         }
         str = str + "# " + v.size() + " vertices";
@@ -50,8 +50,8 @@ public class ObjWriter {
     protected static String writeTextureVertexes(final ArrayList<Vector2f> vt){
         String str = "";
         for (int i = 0; i < vt.size(); i++){
-            final String vtx = String.format("%.4f", vt.get(i).x).replace(',', '.');
-            final String vty = String.format("%.4f", vt.get(i).y).replace(',', '.');
+            final String vtx = String.format("%.4f", vt.get(i).getX()).replace(',', '.');
+            final String vty = String.format("%.4f", vt.get(i).getY()).replace(',', '.');
             str = str + "vt " + vtx + " " + vty + " " + "0.0000" + "\n";
         }
         str = str + "# " + vt.size() + " texture coords";
@@ -63,9 +63,9 @@ public class ObjWriter {
     protected static String writeNormals(final ArrayList<Vector3f> vn){
         String str = "";
         for (int i = 0; i < vn.size(); i++){
-            final String vx = String.format("%.4f", vn.get(i).x).replace(',', '.');
-            final String vy = String.format("%.4f", vn.get(i).y).replace(',', '.');
-            final String vz = String.format("%.4f", vn.get(i).z).replace(',', '.');
+            final String vx = String.format("%.4f", vn.get(i).getX()).replace(',', '.');
+            final String vy = String.format("%.4f", vn.get(i).getY()).replace(',', '.');
+            final String vz = String.format("%.4f", vn.get(i).getZ()).replace(',', '.');
             str = str + "vn  " + vx + " " + vy + " " + vz + "\n";
         }
         str = str + "# " + vn.size() + " normals";

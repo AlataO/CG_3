@@ -36,3 +36,5 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/src/main/java/ru/vsu/cs/kharlamov_i_s/cg_3/ObjModels/
+/src/main/java/ru/vsu/cs/kharlamov_i_s/cg_3/ObjModels/

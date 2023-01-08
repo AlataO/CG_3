@@ -1,4 +1,4 @@
-package com.cgvsu.objreader;
+package ru.vsu.cs.kharlamov_i_s.cg_3.ObjReader;
 
 public class ReaderExceptions {
     public static class ObjReaderException extends RuntimeException {

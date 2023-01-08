@@ -1,8 +1,8 @@
-package com.cgvsu.model;
-import com.cgvsu.math.Vector2f;
-import com.cgvsu.math.Vector3f;
-import com.cgvsu.objreader.ObjReader;
-import com.cgvsu.objreader.ReaderExceptions;
+package ru.vsu.cs.kharlamov_i_s.cg_3.model;
+
+import ru.vsu.cs.kharlamov_i_s.cg_3.math.Vector2f;
+import ru.vsu.cs.kharlamov_i_s.cg_3.math.Vector3f;
+import ru.vsu.cs.kharlamov_i_s.cg_3.ObjReader.ReaderExceptions;
 
 import java.util.*;
 

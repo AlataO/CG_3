@@ -1,6 +1,4 @@
-package com.cgvsu.math;
-
-import com.cgvsu.objreader.ObjReader;
+package ru.vsu.cs.kharlamov_i_s.cg_3.math;
 
 // Это заготовка для собственной библиотеки для работы с линейной алгеброй
 public class Vector2f {

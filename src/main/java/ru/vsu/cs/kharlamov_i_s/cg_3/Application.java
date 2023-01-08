@@ -3,6 +3,7 @@ package ru.vsu.cs.kharlamov_i_s.cg_3;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ru.vsu.cs.kharlamov_i_s.cg_3.ObjReader.ObjReader;
 
 import java.io.IOException;
 

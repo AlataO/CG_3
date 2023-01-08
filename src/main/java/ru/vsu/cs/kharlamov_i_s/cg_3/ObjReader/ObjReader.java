@@ -1,10 +1,9 @@
-package com.cgvsu.objreader;
+package ru.vsu.cs.kharlamov_i_s.cg_3.ObjReader;
 
-import com.cgvsu.math.Vector2f;
-import com.cgvsu.math.Vector3f;
-import com.cgvsu.model.Model;
-import com.cgvsu.model.Polygon;
-
+import ru.vsu.cs.kharlamov_i_s.cg_3.math.Vector2f;
+import ru.vsu.cs.kharlamov_i_s.cg_3.math.Vector3f;
+import ru.vsu.cs.kharlamov_i_s.cg_3.model.Model;
+import ru.vsu.cs.kharlamov_i_s.cg_3.model.Polygon;
 
 import java.util.ArrayList;
 import java.util.Arrays;
