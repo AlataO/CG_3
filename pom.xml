@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>ru.vsu.cs.kharlamov_i_s.cg_3/ru.vsu.cs.kharlamov_i_s.cg_3.Application
+                            <mainClass>ru.vsu.cs.kharlamov_i_s.cg_3/ru.vsu.cs.kharlamov_i_s.cg_3.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
