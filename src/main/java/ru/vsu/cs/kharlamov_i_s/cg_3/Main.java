@@ -56,7 +56,11 @@ public class Main {
             out.println("Usage:");
             out.println("  <cmd> args <input-file> (<output-file>)");
             out.println("  <cmd> --help");
-            out.println("  <cmd> --window  // show window");
+            out.println("  <cmd> -input  // input model");
+            out.println("  <cmd> -r  // rotate model");
+            out.println("  <cmd> -s  // scale model");
+            out.println("  <cmd> -t  // translate model");
+            out.println("  <cmd> -output  // output model");
             System.exit(params.error ? 1 : 0);
         }
 

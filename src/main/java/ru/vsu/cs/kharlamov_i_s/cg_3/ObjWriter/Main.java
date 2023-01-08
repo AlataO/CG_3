@@ -46,7 +46,7 @@ public class Main {
         }
 
         //запись файла
-        String filePath = "G:" + fileSeparator + "text5.obj";
+        String filePath = "D:" + fileSeparator + "test.obj";
         try {
             System.out.println("Создаём файл");
             ObjWriter.createObjFile(filePath);
