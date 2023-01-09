@@ -5,10 +5,8 @@ import ru.vsu.cs.kharlamov_i_s.cg_3.ObjWriter.ObjWriter;
 import ru.vsu.cs.kharlamov_i_s.cg_3.model.Model;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 
@@ -17,10 +15,6 @@ public class Main {
     public static class CmdParams {
         private Model input;
         private String output;
-        private boolean rotationChange;
-        private boolean scaleChange;
-        private boolean translationChange;
-        private boolean window;
         private boolean help;
         public boolean error;
     }
@@ -54,12 +48,10 @@ public class Main {
             out.println("  <cmd> <input-file> args (<output-file>)");
             out.println("  <cmd> --help");
             out.println("  <cmd> -input <path> // input model");
-            out.println("  <cmd> -r // rotate model");
-            out.println("  <cmd> -s // scale model");
-            out.println("  <cmd> -t // translate model");
             out.println("  <cmd> -output <path> // output model");
             System.exit(params.error ? 1 : 0);
         }
+
         Scanner in = new Scanner(System.in);
         ObjWriter.writeToFile(params.input, new File(params.output));
 
