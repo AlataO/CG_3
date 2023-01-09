@@ -15,58 +15,31 @@ public class AffineTransformation {
         float sin = (float) Math.sin (angle);
         Matrix4f matrix4f = rotateScaleTranslateMatrix4();
         Matrix3f matrix3f;
-        List<Vector3f> tempV = new ArrayList<>();
-        List<Vector3f> tempN = new ArrayList<>();
-        List<ru.vsu.cs.kharlamov_i_s.cg_3.math.Vector2f> tempVt = new ArrayList<>();
         switch (axis) {
-            case ("x"):
+            case (" x"):
                 matrix4f.m11=cos; matrix4f.m12=-sin; matrix4f.m21=sin; matrix4f.m22=cos;
                 matrix3f= rotateScaleTranslateMatrix3FromMatrix4(matrix4f);
-                productOfMatrix4Multiplication(tempV, model.getVertices(), matrix4f);
-                productOfMatrix4Multiplication(tempN, model.getNormals(), matrix4f);
-                productOfMatrix3Multiplication(tempVt, model.getTextureVertices(), matrix3f);
-                break;
-            case ("y"):
+                return modelMatrixMultiplication(model, matrix4f, matrix3f);
+            case (" y"):
                 matrix4f.m00=cos; matrix4f.m20=-sin; matrix4f.m02=sin; matrix4f.m22=cos;
                 matrix3f= rotateScaleTranslateMatrix3FromMatrix4(matrix4f);
-                productOfMatrix4Multiplication(tempV, model.getVertices(), matrix4f);
-                productOfMatrix4Multiplication(tempN, model.getNormals(), matrix4f);
-                productOfMatrix3Multiplication(tempVt, model.getTextureVertices(), matrix3f);
-                break;
-            case ("z"):
+                return modelMatrixMultiplication(model, matrix4f, matrix3f);
+            case (" z"):
                 matrix4f.m00=cos; matrix4f.m01=-sin; matrix4f.m10=sin; matrix4f.m11=cos;
                 matrix3f= rotateScaleTranslateMatrix3FromMatrix4(matrix4f);
-                productOfMatrix4Multiplication(tempV, model.getVertices(), matrix4f);
-                productOfMatrix4Multiplication(tempN, model.getNormals(), matrix4f);
-                productOfMatrix3Multiplication(tempVt, model.getTextureVertices(), matrix3f);
-                break;
+                return modelMatrixMultiplication(model, matrix4f, matrix3f);
         }
-        model.setVertices(tempV);
-        model.setNormals(tempN);
-        model.setTextureVertices(tempVt);
-
         return model;
     }
 
     public static Model scaleTransformation (Model model, float factorX, float factorY, float factorZ){
         Matrix4f matrix4f = rotateScaleTranslateMatrix4();
-        Matrix3f matrix3f;
         matrix4f.m00=factorX;
         matrix4f.m11=factorY;
         matrix4f.m22=factorZ;
-        matrix3f= rotateScaleTranslateMatrix3FromMatrix4(matrix4f);
-        List<Vector3f> tempV = new ArrayList<>();
-        List<Vector3f> tempN = new ArrayList<>();
-        List<ru.vsu.cs.kharlamov_i_s.cg_3.math.Vector2f> tempVt = new ArrayList<>();
+        Matrix3f matrix3f = rotateScaleTranslateMatrix3FromMatrix4(matrix4f);
 
-        productOfMatrix4Multiplication(tempV, model.getVertices(), matrix4f);
-        productOfMatrix4Multiplication(tempN, model.getNormals(), matrix4f);
-        productOfMatrix3Multiplication(tempVt, model.getTextureVertices(), matrix3f);
-        model.setVertices(tempV);
-        model.setNormals(tempN);
-        model.setTextureVertices(tempVt);
-
-        return model;
+        return modelMatrixMultiplication(model, matrix4f, matrix3f);
     }
 
     public static Model translateTransformation (Model model, float factorX, float factorY, float factorZ){
@@ -74,17 +47,20 @@ public class AffineTransformation {
         Matrix3f matrix3f = rotateScaleTranslateMatrix3();
         matrix4f.m30=factorX; matrix4f.m31=factorY; matrix4f.m32=factorZ;
         matrix3f.m20=factorX; matrix3f.m21=factorY;
+
+        return modelMatrixMultiplication(model, matrix4f, matrix3f);
+    }
+
+    private static Model modelMatrixMultiplication (Model model, Matrix4f matrix4f, Matrix3f matrix3f){
         List<Vector3f> tempV = new ArrayList<>();
         List<Vector3f> tempN = new ArrayList<>();
         List<ru.vsu.cs.kharlamov_i_s.cg_3.math.Vector2f> tempVt = new ArrayList<>();
-
         productOfMatrix4Multiplication(tempV, model.getVertices(), matrix4f);
         productOfMatrix4Multiplication(tempN, model.getNormals(), matrix4f);
         productOfMatrix3Multiplication(tempVt, model.getTextureVertices(), matrix3f);
         model.setVertices(tempV);
         model.setNormals(tempN);
         model.setTextureVertices(tempVt);
-
         return model;
     }
 

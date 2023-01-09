@@ -35,17 +35,8 @@ public class Main {
             if (args[0].equals("-input")) {
                 parameters.input = ObjReader.read(Path.of(args[1]), true);
             }
-            if (args[2].equals("-r") || args[3].equals("-r") || args[4].equals("-r")) {
-                parameters.rotationChange = true;
-            }
-            if (args[2].equals("-s") || args[3].equals("-s") || args[4].equals("-s")) {
-                parameters.scaleChange = true;
-            }
-            if (args[2].equals("-t") || args[3].equals("-t") || args[4].equals("-t")) {
-                parameters.translationChange = true;
-            }
-            if (args[2].equals("-output") || args[4].equals("-output") || args[5].equals("-output")) {
-                parameters.output = args[5];
+            if (args[2].equals("-output")) {
+                parameters.output = args[3];
             }
             return parameters;
         } else {
@@ -70,20 +61,21 @@ public class Main {
             System.exit(params.error ? 1 : 0);
         }
         Scanner in = new Scanner(System.in);
-        if (params.rotationChange) {
-            System.out.println("Input: <angle> <axis>");
-            double angle = in.nextDouble();
-            ObjWriter.writeToFile(AffineTransformation.rotationTransformation(params.input,in.nextDouble(), in.nextLine()), new File("D:\\test.obj"));
-        }
-        if (params.scaleChange)
-            //Path fileName = Path.of("D:\\Projects\\Year 2\\1 Semester\\CG_3\\src\\main\\java\\ru\\vsu\\cs\\kharlamov_i_s\\cg_3\\ObjModels\\Trash\\Teapot.obj");
-            //params.input = ObjReader.read(fileName, true);
-            //ObjWriter.writeToFile(AffineTransformation.scaleTransformation(params.input,5, 1, 0.5f), new File("D:\\test.obj"));
-            //ObjWriter.writeToFile(AffineTransformation.rotationTransformation(params.input,90, 'x'), new File("D:\\test.obj"));
-            ObjWriter.writeToFile(AffineTransformation.translateTransformation(params.input, 20,20,20), new File("D:\\test.obj"));
+        ObjWriter.writeToFile(params.input, new File(params.output));
 
-        PrintStream out = (params.output != null) ? new PrintStream(params.output) : System.out;
-        out.println("Transformation completed");
-        out.close();
+            params.input = ObjReader.read(Path.of(params.output), false);
+            System.out.println("Rotation Input: <angle> <axis>");
+            ObjWriter.writeToFile(AffineTransformation.rotationTransformation(params.input, in.nextDouble(), in.nextLine()), new File(params.output));
+
+            params.input = ObjReader.read(Path.of(params.output), false);
+            System.out.println("Scale Input: <factorX> <factorY> <factorZ>");
+            ObjWriter.writeToFile(AffineTransformation.scaleTransformation(params.input, in.nextFloat(), in.nextFloat(), in.nextFloat()), new File(params.output));
+
+            params.input = ObjReader.read(Path.of(params.output), false);
+            System.out.println("Translation Input: <factorX> <factorY> <factorZ>");
+            ObjWriter.writeToFile(AffineTransformation.translateTransformation(params.input, in.nextFloat(), in.nextFloat(), in.nextFloat()), new File(params.output));
+
+        System.out.println("Transformation completed");
+        System.out.close();
     }
 }
