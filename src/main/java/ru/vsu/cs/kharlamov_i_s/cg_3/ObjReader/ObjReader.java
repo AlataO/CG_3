@@ -5,6 +5,9 @@ import ru.vsu.cs.kharlamov_i_s.cg_3.math.Vector3f;
 import ru.vsu.cs.kharlamov_i_s.cg_3.model.Model;
 import ru.vsu.cs.kharlamov_i_s.cg_3.model.Polygon;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,8 +22,15 @@ public class ObjReader {
 	private static final String OBJ_GROUP_TOKEN = "g";
 	private static final String OBJ_EMPTY_TOKEN = "";
 
-	public static Model read(final String fileContent, boolean writeInfo) {
-
+	public static Model read(final String filePath, boolean writeInfo) throws IOException {
+		Path fileName = Path.of(filePath);
+		String fileContent;
+		try {
+		fileContent = Files.readString(fileName);
+		} catch (IOException exception) {
+			throw new ReaderExceptions.WrongFileException("Can't read this file. Extension or encoding is wrong");
+		}
+		if (writeInfo) System.out.println("Loading model ...");
 		Model resultModel = new Model();
 		int lineInd = 0;
 		Scanner scanner = new Scanner(fileContent);
@@ -55,6 +65,12 @@ public class ObjReader {
 				}
 				line = scanner.nextLine();
 			}
+		}
+		if (writeInfo) {
+			System.out.println("Vertices: " + resultModel.getVertices().size());
+			System.out.println("Texture vertices: " + resultModel.getTextureVertices().size());
+			System.out.println("Normals: " + resultModel.getNormals().size());
+			System.out.println("Polygons: " + resultModel.getPolygons().size());
 		}
 		resultModel.checkConsistency();
 		return resultModel;
@@ -172,4 +188,5 @@ public class ObjReader {
 			throw new ReaderExceptions.ObjReaderException("Failed to parse int value.", lineInd);
 		}
 	}
+
 }
