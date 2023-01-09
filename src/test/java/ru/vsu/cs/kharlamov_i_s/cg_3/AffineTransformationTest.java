@@ -8,8 +8,6 @@ import ru.vsu.cs.kharlamov_i_s.cg_3.math.Vector3f;
 import javax.vecmath.Matrix3f;
 import javax.vecmath.Matrix4f;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -125,15 +123,7 @@ class AffineTransformationTest {
     rotateScaleTranslateMatrix3FromMatrix4ShouldReturnAMatrixWithTheSameValuesAsInTheInputMatrix() {
         Matrix3f expected = new Matrix3f(new float[]{1, 2, 3, 5, 6, 7, 9, 10, 11});
         Matrix3f actual = AffineTransformation.rotateScaleTranslateMatrix3FromMatrix4(new Matrix4f(new float[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}));
-        assertEquals(expected.m00, actual.m00);
-        assertEquals(expected.m01, actual.m01);
-        assertEquals(expected.m02, actual.m02);
-        assertEquals(expected.m10, actual.m10);
-        assertEquals(expected.m11, actual.m11);
-        assertEquals(expected.m12, actual.m12);
-        assertEquals(expected.m20, actual.m20);
-        assertEquals(expected.m21, actual.m21);
-        assertEquals(expected.m22, actual.m22);
+        assertEquals(expected,actual);
     }
 
 }

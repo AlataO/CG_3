@@ -3,6 +3,7 @@ package ru.vsu.cs.kharlamov_i_s.cg_3;
 import ru.vsu.cs.kharlamov_i_s.cg_3.math.Vector2f;
 import ru.vsu.cs.kharlamov_i_s.cg_3.math.Vector3f;
 import ru.vsu.cs.kharlamov_i_s.cg_3.model.Model;
+import ru.vsu.cs.kharlamov_i_s.cg_3.model.Polygon;
 
 import javax.vecmath.*;
 import java.util.ArrayList;
@@ -47,7 +48,6 @@ public class AffineTransformation {
         Matrix3f matrix3f = rotateScaleTranslateMatrix3();
         matrix4f.m03=factorX; matrix4f.m13=factorY; matrix4f.m23=factorZ;
         matrix3f.m02=factorX; matrix3f.m12=factorY;
-
         return modelMatrixMultiplication(model, matrix4f, matrix3f);
     }
 
