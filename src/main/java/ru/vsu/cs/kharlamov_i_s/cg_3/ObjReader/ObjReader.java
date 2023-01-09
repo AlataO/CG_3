@@ -22,11 +22,10 @@ public class ObjReader {
 	private static final String OBJ_GROUP_TOKEN = "g";
 	private static final String OBJ_EMPTY_TOKEN = "";
 
-	public static Model read(final String filePath, boolean writeInfo) throws IOException {
-		Path fileName = Path.of(filePath);
+	public static Model read(final Path filePath, boolean writeInfo) throws IOException {
 		String fileContent;
 		try {
-		fileContent = Files.readString(fileName);
+		fileContent = Files.readString(filePath);
 		} catch (IOException exception) {
 			throw new ReaderExceptions.WrongFileException("Can't read this file. Extension or encoding is wrong");
 		}
@@ -126,9 +125,9 @@ public class ObjReader {
 			parseOneFaceWord(s, onePolygonVertexIndices, onePolygonTextureVertexIndices, onePolygonNormalIndices, lineInd);
 		}
 		Polygon resultPolygon = new Polygon();
-		resultPolygon.setVertexIndices(onePolygonVertexIndices);
-		resultPolygon.setTextureVertexIndices(onePolygonTextureVertexIndices);
-		resultPolygon.setNormalIndices(onePolygonNormalIndices);
+		resultPolygon.setVertexIndices((List<Integer>) onePolygonVertexIndices);
+		resultPolygon.setTextureVertexIndices((List<Integer>) onePolygonTextureVertexIndices);
+		resultPolygon.setNormalIndices((List<Integer>) onePolygonNormalIndices);
 		return resultPolygon;
 	}
 

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Scanner;
 
 
 public class Main {
@@ -32,7 +33,7 @@ public class Main {
                 return parameters;
             }
             if (args[0].equals("-input")) {
-                parameters.input = ObjReader.read(String.valueOf(args[1]), true);
+                parameters.input = ObjReader.read(Path.of(args[1]), true);
             }
             if (args[2].equals("-r") || args[3].equals("-r") || args[4].equals("-r")) {
                 parameters.rotationChange = true;
@@ -59,20 +60,27 @@ public class Main {
         if (params.help) {
             PrintStream out = params.error ? System.err : System.out;
             out.println("Usage:");
-            out.println("  <cmd> args <input-file> (<output-file>)");
+            out.println("  <cmd> <input-file> args (<output-file>)");
             out.println("  <cmd> --help");
-            out.println("  <cmd> -input  // input model");
-            out.println("  <cmd> -r  // rotate model");
-            out.println("  <cmd> -s  // scale model");
-            out.println("  <cmd> -t  // translate model");
-            out.println("  <cmd> -output  // output model");
-            //System.exit(params.error ? 1 : 0);
-            Path fileName = Path.of("D:\\Projects\\Year 2\\1 Semester\\CG_3\\src\\main\\java\\ru\\vsu\\cs\\kharlamov_i_s\\cg_3\\ObjModels\\Trash\\Teapot.obj");
-            String fileContent;
-            fileContent = Files.readString(fileName);
-            params.input = ObjReader.read(fileContent, true);
-            ObjWriter.writeToFile(AffineTransformation.RotationTransformation(params.input,45, 'z'), new File("D:\\test.obj"));
+            out.println("  <cmd> -input <path> // input model");
+            out.println("  <cmd> -r // rotate model");
+            out.println("  <cmd> -s // scale model");
+            out.println("  <cmd> -t // translate model");
+            out.println("  <cmd> -output <path> // output model");
+            System.exit(params.error ? 1 : 0);
         }
+        Scanner in = new Scanner(System.in);
+        if (params.rotationChange) {
+            System.out.println("Input: <angle> <axis>");
+            double angle = in.nextDouble();
+            ObjWriter.writeToFile(AffineTransformation.rotationTransformation(params.input,in.nextDouble(), in.nextLine()), new File("D:\\test.obj"));
+        }
+        if (params.scaleChange)
+            //Path fileName = Path.of("D:\\Projects\\Year 2\\1 Semester\\CG_3\\src\\main\\java\\ru\\vsu\\cs\\kharlamov_i_s\\cg_3\\ObjModels\\Trash\\Teapot.obj");
+            //params.input = ObjReader.read(fileName, true);
+            //ObjWriter.writeToFile(AffineTransformation.scaleTransformation(params.input,5, 1, 0.5f), new File("D:\\test.obj"));
+            //ObjWriter.writeToFile(AffineTransformation.rotationTransformation(params.input,90, 'x'), new File("D:\\test.obj"));
+            ObjWriter.writeToFile(AffineTransformation.translateTransformation(params.input, 20,20,20), new File("D:\\test.obj"));
 
         PrintStream out = (params.output != null) ? new PrintStream(params.output) : System.out;
         out.println("Transformation completed");

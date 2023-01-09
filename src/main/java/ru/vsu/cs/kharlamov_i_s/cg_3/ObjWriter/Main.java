@@ -35,7 +35,7 @@ public class Main {
         try {
             String fileContent = Files.readString(fileName);
             System.out.println("Loading model ...");
-            m1 = ObjReader.read(fileContent, false);
+            m1 = ObjReader.read(fileName, true);
 
             System.out.println("Vertices: " + m1.getVertices().size());
             System.out.println("Texture vertices: " + m1.getTextureVertices().size());
